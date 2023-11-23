@@ -1,0 +1,30 @@
+syntax = "proto3";
+
+option csharp_namespace = "Api";
+
+package resource;
+
+// The resource service definition.
+service Resources {
+  rpc GetResources (GetResourcesRequest) returns (GetResourcesReply);
+}
+
+// The request message containing the user's name.
+message GetResourcesRequest {
+  string id = 1;
+  int32 skip = 2;
+  int32 take = 3;
+  string search = 4;
+  string sortField = 5;
+  int32 sortOrder = 6;
+}
+
+// The response message containing the greetings.
+message GetResourcesReply {
+  repeated Resource data = 1;
+  int32 total = 2;
+}
+
+message Resource {
+	string id = 1;
+}

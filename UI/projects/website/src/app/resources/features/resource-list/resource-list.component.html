@@ -1,0 +1,10 @@
+<div
+  *ngIf="{
+    total: total$ | async
+  } as state"
+>
+
+{{state.total}}
+
+
+</div>

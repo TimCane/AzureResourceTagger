@@ -1,0 +1,31 @@
+syntax = "proto3";
+
+option csharp_namespace = "Api";
+
+package resource_group;
+
+// The resource service definition.
+service ResourceGroups {
+  rpc GetResourceGroups (GetResourceGroupsRequest) returns (GetResourceGroupsReply);
+}
+
+// The request message containing the user's name.
+message GetResourceGroupsRequest {
+  int32 skip = 1;
+  int32 take = 2;
+  string search = 3;
+  string sortField = 4;
+  int32 sortOrder = 5;
+}
+
+// The response message containing the greetings.
+message GetResourceGroupsReply {
+  repeated ResourceGroup data = 1;
+  int32 total = 2;
+}
+
+message ResourceGroup {
+	string id = 1;
+	string name = 2;
+	string location = 3;
+}

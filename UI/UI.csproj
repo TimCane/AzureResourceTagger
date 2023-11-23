@@ -1,0 +1,108 @@
+<Project Sdk="Microsoft.VisualStudio.JavaScript.Sdk/0.5.74-alpha">
+	<PropertyGroup>
+		<StartupCommand>npm start</StartupCommand>
+		<JavaScriptTestFramework>Jasmine</JavaScriptTestFramework>
+		<!-- Command to run on project build -->
+		<BuildCommand></BuildCommand>
+		<!-- Command to create an optimized build of the project that's ready for publishing -->
+		<ProductionBuildCommand>npm run build</ProductionBuildCommand>
+		<!-- Folder where production build objects will be placed -->
+		<BuildOutputFolder>$(MSBuildProjectDirectory)\dist\angularapp</BuildOutputFolder>
+	</PropertyGroup>
+	<ItemGroup>
+	  <TypeScriptConfiguration Remove="dist\**" />
+	</ItemGroup>
+	<ItemGroup>
+	  <None Remove="dist\**" />
+	</ItemGroup>
+	<ItemGroup>
+	  <None Remove="dist\api-client\README.md" />
+	</ItemGroup>
+	<ItemGroup>
+	  <None Remove="dist\api-client\public-api.d.ts" />
+	</ItemGroup>
+	<ItemGroup>
+	  <None Remove="dist\api-client\package.json" />
+	</ItemGroup>
+	<ItemGroup>
+	  <None Remove="dist\api-client\lib\services\resources.service.d.ts" />
+	</ItemGroup>
+	<ItemGroup>
+	  <None Remove="dist\api-client\lib\services\resource-groups.service.d.ts" />
+	</ItemGroup>
+	<ItemGroup>
+	  <None Remove="dist\api-client\lib\models\pagination-filter.interface.d.ts" />
+	</ItemGroup>
+	<ItemGroup>
+	  <None Remove="dist\api-client\lib\generated\resource.pbsc.d.ts" />
+	</ItemGroup>
+	<ItemGroup>
+	  <None Remove="dist\api-client\lib\generated\resource.pbconf.d.ts" />
+	</ItemGroup>
+	<ItemGroup>
+	  <None Remove="dist\api-client\lib\generated\resource.pb.d.ts" />
+	</ItemGroup>
+	<ItemGroup>
+	  <None Remove="dist\api-client\lib\generated\resource-group.pbsc.d.ts" />
+	</ItemGroup>
+	<ItemGroup>
+	  <None Remove="dist\api-client\lib\generated\resource-group.pbconf.d.ts" />
+	</ItemGroup>
+	<ItemGroup>
+	  <None Remove="dist\api-client\lib\generated\resource-group.pb.d.ts" />
+	</ItemGroup>
+	<ItemGroup>
+	  <None Remove="dist\api-client\lib\api-client.module.d.ts" />
+	</ItemGroup>
+	<ItemGroup>
+	  <None Remove="dist\api-client\index.d.ts" />
+	</ItemGroup>
+	<ItemGroup>
+	  <None Remove="dist\api-client\fesm2020\api-client.mjs.map" />
+	</ItemGroup>
+	<ItemGroup>
+	  <None Remove="dist\api-client\fesm2020\api-client.mjs" />
+	</ItemGroup>
+	<ItemGroup>
+	  <None Remove="dist\api-client\fesm2015\api-client.mjs.map" />
+	</ItemGroup>
+	<ItemGroup>
+	  <None Remove="dist\api-client\fesm2015\api-client.mjs" />
+	</ItemGroup>
+	<ItemGroup>
+	  <None Remove="dist\api-client\esm2020\public-api.mjs" />
+	</ItemGroup>
+	<ItemGroup>
+	  <None Remove="dist\api-client\esm2020\lib\services\resources.service.mjs" />
+	</ItemGroup>
+	<ItemGroup>
+	  <None Remove="dist\api-client\esm2020\lib\services\resource-groups.service.mjs" />
+	</ItemGroup>
+	<ItemGroup>
+	  <None Remove="dist\api-client\esm2020\lib\models\pagination-filter.interface.mjs" />
+	</ItemGroup>
+	<ItemGroup>
+	  <None Remove="dist\api-client\esm2020\lib\generated\resource.pbsc.mjs" />
+	</ItemGroup>
+	<ItemGroup>
+	  <None Remove="dist\api-client\esm2020\lib\generated\resource.pbconf.mjs" />
+	</ItemGroup>
+	<ItemGroup>
+	  <None Remove="dist\api-client\esm2020\lib\generated\resource.pb.mjs" />
+	</ItemGroup>
+	<ItemGroup>
+	  <None Remove="dist\api-client\esm2020\lib\generated\resource-group.pbsc.mjs" />
+	</ItemGroup>
+	<ItemGroup>
+	  <None Remove="dist\api-client\esm2020\lib\generated\resource-group.pbconf.mjs" />
+	</ItemGroup>
+	<ItemGroup>
+	  <None Remove="dist\api-client\esm2020\lib\generated\resource-group.pb.mjs" />
+	</ItemGroup>
+	<ItemGroup>
+	  <None Remove="dist\api-client\esm2020\lib\api-client.module.mjs" />
+	</ItemGroup>
+	<ItemGroup>
+	  <None Remove="dist\api-client\esm2020\api-client.mjs" />
+	</ItemGroup>
+</Project>

@@ -1,0 +1,15 @@
+<div
+  *ngIf="{
+    resourceGroups: resourceGroups$ | async,
+    total: total$ | async
+  } as state"
+>
+
+<app-resource-groups-table
+ *ngIf="state.resourceGroups" 
+ [resourceGroups]="state.resourceGroups" 
+ [total]="state.total!"
+  (loadResourceGroups)="onLoadResourceGroups($event)">
+</app-resource-groups-table>
+
+</div>
