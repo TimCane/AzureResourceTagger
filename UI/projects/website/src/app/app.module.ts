@@ -7,19 +7,18 @@ import { StoreModule } from '@ngrx/store';
 import { StoreDevtoolsModule } from '@ngrx/store-devtools';
 import { GrpcCoreModule } from '@ngx-grpc/core';
 import { GrpcWebClientModule } from '@ngx-grpc/grpc-web-client';
+import { environment } from '../environments/environment';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
-import { ResourcesModule } from './resources/resources.module';
 
 @NgModule({
   declarations: [AppComponent],
   imports: [
     BrowserModule,
     AppRoutingModule,
-    ResourcesModule,
     GrpcCoreModule.forRoot(),
     GrpcWebClientModule.forRoot({
-      settings: { host: 'https://localhost:7121' }
+      settings: { host: environment.apiUrl }
     }),
     StoreModule.forRoot({}),
     EffectsModule.forRoot([]),

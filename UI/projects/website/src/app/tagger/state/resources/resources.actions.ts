@@ -4,7 +4,7 @@ import { PaginationFilter } from 'projects/api-client/src/lib/models/pagination-
 
 export const loadResources = createAction(
   '[Resource Page] Load Resources',
-  props<{ id: string; filter: PaginationFilter }>()
+  props<{ filter: PaginationFilter }>()
 );
 
 export const loadResourcesSuccess = createAction(

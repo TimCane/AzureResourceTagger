@@ -269,7 +269,7 @@ export class GetResourcesReply implements GrpcMessage {
    * @param _instance message instance
    */
   static refineValues(_instance: GetResourcesReply) {
-    _instance.data = _instance.data || [];
+    _instance.resources = _instance.resources || [];
     _instance.total = _instance.total || 0;
   }
 
@@ -292,7 +292,9 @@ export class GetResourcesReply implements GrpcMessage {
             messageInitializer1,
             Resource.deserializeBinaryFromReader
           );
-          (_instance.data = _instance.data || []).push(messageInitializer1);
+          (_instance.resources = _instance.resources || []).push(
+            messageInitializer1
+          );
           break;
         case 2:
           _instance.total = _reader.readInt32();
@@ -314,10 +316,10 @@ export class GetResourcesReply implements GrpcMessage {
     _instance: GetResourcesReply,
     _writer: BinaryWriter
   ) {
-    if (_instance.data && _instance.data.length) {
+    if (_instance.resources && _instance.resources.length) {
       _writer.writeRepeatedMessage(
         1,
-        _instance.data as any,
+        _instance.resources as any,
         Resource.serializeBinaryToWriter
       );
     }
@@ -326,7 +328,7 @@ export class GetResourcesReply implements GrpcMessage {
     }
   }
 
-  private _data?: Resource[];
+  private _resources?: Resource[];
   private _total: number;
 
   /**
@@ -335,15 +337,15 @@ export class GetResourcesReply implements GrpcMessage {
    */
   constructor(_value?: RecursivePartial<GetResourcesReply.AsObject>) {
     _value = _value || {};
-    this.data = (_value.data || []).map(m => new Resource(m));
+    this.resources = (_value.resources || []).map(m => new Resource(m));
     this.total = _value.total;
     GetResourcesReply.refineValues(this);
   }
-  get data(): Resource[] | undefined {
-    return this._data;
+  get resources(): Resource[] | undefined {
+    return this._resources;
   }
-  set data(value: Resource[] | undefined) {
-    this._data = value;
+  set resources(value: Resource[] | undefined) {
+    this._resources = value;
   }
   get total(): number {
     return this._total;
@@ -367,7 +369,7 @@ export class GetResourcesReply implements GrpcMessage {
    */
   toObject(): GetResourcesReply.AsObject {
     return {
-      data: (this.data || []).map(m => m.toObject()),
+      resources: (this.resources || []).map(m => m.toObject()),
       total: this.total
     };
   }
@@ -389,7 +391,7 @@ export class GetResourcesReply implements GrpcMessage {
     options?: ToProtobufJSONOptions
   ): GetResourcesReply.AsProtobufJSON {
     return {
-      data: (this.data || []).map(m => m.toProtobufJSON(options)),
+      resources: (this.resources || []).map(m => m.toProtobufJSON(options)),
       total: this.total
     };
   }
@@ -399,7 +401,7 @@ export module GetResourcesReply {
    * Standard JavaScript object representation for GetResourcesReply
    */
   export interface AsObject {
-    data?: Resource.AsObject[];
+    resources?: Resource.AsObject[];
     total: number;
   }
 
@@ -407,7 +409,7 @@ export module GetResourcesReply {
    * Protobuf JSON representation for GetResourcesReply
    */
   export interface AsProtobufJSON {
-    data: Resource.AsProtobufJSON[] | null;
+    resources: Resource.AsProtobufJSON[] | null;
     total: number;
   }
 }

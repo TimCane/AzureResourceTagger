@@ -2,8 +2,9 @@ import { Injectable } from '@angular/core';
 import { Actions, createEffect, ofType } from '@ngrx/effects';
 import { Store } from '@ngrx/store';
 import { ResourcesService } from 'api-client';
-import { catchError, from, map, of, switchMap } from 'rxjs';
+import { catchError, from, map, of, switchMap, withLatestFrom } from 'rxjs';
 import { AppState } from '../../../app.state';
+import { getSelectedResourceGroup } from '../resource-groups/resource-groups.selectors';
 import {
   loadResources,
   loadResourcesFailure,
@@ -20,13 +21,12 @@ export class ResourcesEffects {
   loadResources$ = createEffect(() =>
     this.actions$.pipe(
       ofType(loadResources),
-      switchMap(({ id, filter }) =>
-        from(this.resourcesService.getResources(id, filter)).pipe(
-          map(({ data, total }) => {
-            console.log(data);
-
+      withLatestFrom(this.store.select(getSelectedResourceGroup)),
+      switchMap(([{ filter }, group]) =>
+        from(this.resourcesService.getResources(group?.id!, filter)).pipe(
+          map(({ resources, total }) => {
             return loadResourcesSuccess({
-              resources: data ?? [],
+              resources: resources ?? [],
               total: total ?? 0
             });
           }),

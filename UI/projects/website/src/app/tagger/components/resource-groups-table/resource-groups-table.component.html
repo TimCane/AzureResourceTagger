@@ -13,6 +13,7 @@ dataKey="id"
 currentPageReportTemplate="Showing {first} to {last} of {totalRecords} entries"
 [showCurrentPageReport]="true"
 styleClass="p-datatable-striped"
+[loading]="resourceGroups.length == 0"
 >
 <ng-template pTemplate="caption">
     <div class="flex align-items-center justify-between">
@@ -35,7 +36,7 @@ styleClass="p-datatable-striped"
         <td>{{ resourceGroup.location }}</td>
         <td>
             <div class="flex items-end">
-                <a pButton pRipple icon="pi pi-arrow-right" class="p-button-rounded" [routerLink]='[resourceGroup.id]'></a>
+                <button pButton pRipple icon="pi pi-arrow-right" class="p-button-rounded" (click)="onSelect(resourceGroup)"></button>
             </div>
 
         </td>

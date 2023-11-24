@@ -7,9 +7,9 @@ package resource_group;
 // The resource service definition.
 service ResourceGroups {
   rpc GetResourceGroups (GetResourceGroupsRequest) returns (GetResourceGroupsReply);
+  rpc GetResourceGroup (GetResourceGroupRequest) returns (GetResourceGroupReply);
 }
 
-// The request message containing the user's name.
 message GetResourceGroupsRequest {
   int32 skip = 1;
   int32 take = 2;
@@ -18,10 +18,17 @@ message GetResourceGroupsRequest {
   int32 sortOrder = 5;
 }
 
-// The response message containing the greetings.
 message GetResourceGroupsReply {
-  repeated ResourceGroup data = 1;
+  repeated ResourceGroup groups = 1;
   int32 total = 2;
+}
+
+message GetResourceGroupRequest {
+  string id = 1;
+}
+
+message GetResourceGroupReply {
+  ResourceGroup group = 1;
 }
 
 message ResourceGroup {

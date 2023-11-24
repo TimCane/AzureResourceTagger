@@ -2,13 +2,13 @@ import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { Store } from '@ngrx/store';
 import { PaginationFilter } from 'api-client';
-import { AppState } from '../../../app.state';
-import {} from '../../state/resource-groups/resource-groups.selectors';
-import { loadResources } from '../../state/resources/resources.actions';
+import { AppState } from '../../../../app.state';
+import {} from '../../../state/resource-groups/resource-groups.selectors';
+import { loadResources } from '../../../state/resources/resources.actions';
 import {
   getResources,
   getResourcesTotal
-} from '../../state/resources/resources.selectors';
+} from '../../../state/resources/resources.selectors';
 
 @Component({
   selector: 'app-resource-list',
@@ -31,7 +31,6 @@ export class ResourceListComponent implements OnInit {
     };
     this.store.dispatch(
       loadResources({
-        id: this.route.snapshot.paramMap.get('id') as string,
         filter
       })
     );

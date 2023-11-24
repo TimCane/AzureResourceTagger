@@ -1,5 +1,7 @@
 import { Component } from '@angular/core';
+import { Router } from '@angular/router';
 import { Store } from '@ngrx/store';
+import { ResourceGroup } from 'api-client';
 import { LazyLoadEvent } from 'primeng/api';
 import { AppState } from '../../../app.state';
 import { LazyLoadToPaginationFilter } from '../../../shared/utils/lazy-load-converter';
@@ -18,10 +20,16 @@ export class ResourceGroupListComponent {
   public resourceGroups$ = this.store.select(getResourceGroups);
   public total$ = this.store.select(getResourceGroupsTotal);
 
-  constructor(private store: Store<AppState>) {}
+  constructor(private store: Store<AppState>, private router: Router) {}
 
   onLoadResourceGroups(event: LazyLoadEvent) {
     let filter = LazyLoadToPaginationFilter(event);
     this.store.dispatch(loadResourceGroups({ filter }));
+  }
+
+  onResourceGroupSelection(resourceGroup: ResourceGroup) {
+    if (resourceGroup) {
+      this.router.navigate(['groups', resourceGroup.id]);
+    }
   }
 }

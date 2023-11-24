@@ -23,9 +23,11 @@ export class ResourceGroupsTableComponent {
   @Input() total: number = 0;
 
   @Output() loadResourceGroups: EventEmitter<LazyLoadEvent>;
+  @Output() selectResourceGroup: EventEmitter<ResourceGroup>;
 
   constructor() {
     this.loadResourceGroups = new EventEmitter<LazyLoadEvent>();
+    this.selectResourceGroup = new EventEmitter<ResourceGroup>();
   }
 
   ngOnInit() {}
@@ -36,5 +38,9 @@ export class ResourceGroupsTableComponent {
 
   onSearch(event: Event) {
     this.dt.filterGlobal((event.target as HTMLInputElement).value, 'contains');
+  }
+
+  onSelect(resourceGroup: ResourceGroup) {
+    this.selectResourceGroup.emit(resourceGroup);
   }
 }

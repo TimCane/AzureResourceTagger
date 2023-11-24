@@ -13,11 +13,11 @@ export function selectResourceGroupId(resource: ResourceGroup): string {
   return resource.id;
 }
 
-export const resourcesAdapter = createEntityAdapter<ResourceGroup>({
+export const resourceGroupsAdapter = createEntityAdapter<ResourceGroup>({
   selectId: selectResourceGroupId
 });
 
-export const initialState: ResourceGroupsState = resourcesAdapter.getInitialState(
+export const initialState: ResourceGroupsState = resourceGroupsAdapter.getInitialState(
   {
     selectedResourceGroupId: null,
     total: 0,

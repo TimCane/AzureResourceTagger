@@ -1,5 +1,5 @@
-import { ResourceGroupsState } from './resources/state/resource-groups/resource-groups.state';
-import { ResourcesState } from './resources/state/resources/resources.state';
+import { ResourceGroupsState } from './tagger/state/resource-groups/resource-groups.state';
+import { ResourcesState } from './tagger/state/resources/resources.state';
 
 export interface AppState {
   resources: ResourcesState;

@@ -1,13 +1,16 @@
 import { createFeatureSelector, createSelector } from '@ngrx/store';
-import { ResourceGroupsState, resourcesAdapter } from './resource-groups.state';
+import {
+  ResourceGroupsState,
+  resourceGroupsAdapter
+} from './resource-groups.state';
 
-export const resourcesFeature = createFeatureSelector<ResourceGroupsState>(
+export const resourceGroupsFeature = createFeatureSelector<ResourceGroupsState>(
   'resourceGroupsFeature'
 );
 const selector = <T>(mapping: (state: ResourceGroupsState) => T) =>
-  createSelector(resourcesFeature, mapping);
+  createSelector(resourceGroupsFeature, mapping);
 
-const { selectEntities, selectAll } = resourcesAdapter.getSelectors();
+const { selectEntities, selectAll } = resourceGroupsAdapter.getSelectors();
 
 export const selectResourceGroupEntities = selector(selectEntities);
 
@@ -19,12 +22,12 @@ export const getSelectedResourceGroupId = selector(
 
 export const getResourceGroupsTotal = selector(state => state.total);
 
-export const getResourceGroup = createSelector(
+export const getSelectedResourceGroup = createSelector(
   selectResourceGroupEntities,
   getSelectedResourceGroupId,
-  (resources, selectedResourceGroupId) => {
+  (groups, selectedResourceGroupId) => {
     if (selectedResourceGroupId) {
-      return resources[selectedResourceGroupId];
+      return groups[selectedResourceGroupId];
     }
     return null;
   }

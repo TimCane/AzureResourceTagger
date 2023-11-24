@@ -1,6 +1,8 @@
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import {
+  GetResourceGroupReply,
+  GetResourceGroupRequest,
   GetResourceGroupsReply,
   GetResourceGroupsRequest
 } from '../generated/resource-group.pb';
@@ -25,5 +27,13 @@ export class ResourceGroupsService {
     });
 
     return this.client.getResourceGroups(request);
+  }
+
+  getResourceGroup(id: string): Observable<GetResourceGroupReply> {
+    let request = new GetResourceGroupRequest({
+      id: id
+    });
+
+    return this.client.getResourceGroup(request);
   }
 }

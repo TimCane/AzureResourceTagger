@@ -1,4 +1,5 @@
 import { createReducer, on } from '@ngrx/store';
+import { selectResourceGroup } from '../resource-groups/resource-groups.actions';
 import {
   loadResources,
   loadResourcesFailure,
@@ -12,6 +13,13 @@ import {
 
 export const resourcesReducer = createReducer<ResourcesState>(
   initialState,
+
+  on(selectResourceGroup, () => {
+    return resourcesAdapter.removeAll({
+      ...initialState
+    });
+  }),
+
   on(loadResources, state => ({
     ...state,
     total: 0,

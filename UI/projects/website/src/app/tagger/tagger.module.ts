@@ -3,21 +3,21 @@ import { NgModule } from '@angular/core';
 
 import { EffectsModule } from '@ngrx/effects';
 import { StoreModule } from '@ngrx/store';
-import { ResourcesRoutingModule } from './resources-routing.module';
-import { ResourcesComponent } from './resources.component';
 import { ResourceGroupsEffects } from './state/resource-groups/resource-groups.effects';
 import { resourceGroupsReducer } from './state/resource-groups/resource-groups.reducers';
 import { ResourcesEffects } from './state/resources/resources.effects';
 import { resourcesReducer } from './state/resources/resources.reducers';
+import { TaggerRoutingModule } from './tagger-routing.module';
+import { TaggerComponent } from './tagger.component';
 
 @NgModule({
-  declarations: [ResourcesComponent],
+  declarations: [TaggerComponent],
   imports: [
     CommonModule,
-    ResourcesRoutingModule,
+    TaggerRoutingModule,
     StoreModule.forFeature('resourceGroupsFeature', resourceGroupsReducer),
     StoreModule.forFeature('resourcesFeature', resourcesReducer),
     EffectsModule.forFeature([ResourcesEffects, ResourceGroupsEffects])
   ]
 })
-export class ResourcesModule {}
+export class TaggerModule {}

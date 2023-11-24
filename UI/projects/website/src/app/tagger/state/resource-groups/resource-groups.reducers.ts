@@ -1,17 +1,27 @@
 import { createReducer, on } from '@ngrx/store';
 import {
+  loadResourceGroup,
+  loadResourceGroupFailure,
+  loadResourceGroupSuccess,
   loadResourceGroups,
   loadResourceGroupsFailure,
-  loadResourceGroupsSuccess
+  loadResourceGroupsSuccess,
+  selectResourceGroup
 } from './resource-groups.actions';
 import {
   ResourceGroupsState,
   initialState,
-  resourcesAdapter
+  resourceGroupsAdapter
 } from './resource-groups.state';
 
 export const resourceGroupsReducer = createReducer<ResourceGroupsState>(
   initialState,
+
+  on(selectResourceGroup, (state, { selectedResourceGroupId }) => ({
+    ...state,
+    selectedResourceGroupId
+  })),
+
   on(loadResourceGroups, state => ({
     ...state,
     total: 0,
@@ -19,8 +29,8 @@ export const resourceGroupsReducer = createReducer<ResourceGroupsState>(
     selectedResourceGroupId: null
   })),
 
-  on(loadResourceGroupsSuccess, (state, { resources, total }) => {
-    return resourcesAdapter.setAll(resources, {
+  on(loadResourceGroupsSuccess, (state, { groups, total }) => {
+    return resourceGroupsAdapter.setAll(groups, {
       ...state,
       total: total,
       error: null,
@@ -29,14 +39,33 @@ export const resourceGroupsReducer = createReducer<ResourceGroupsState>(
   }),
 
   on(loadResourceGroupsFailure, (state, { error }) => {
-    return resourcesAdapter.removeAll({
+    return resourceGroupsAdapter.removeAll({
       ...state,
       total: 0,
       selectedResourceGroupId: null,
       error: error,
       status: 'error'
     });
-  })
+  }),
+
+  on(loadResourceGroup, state => ({
+    ...state,
+    status: 'loading'
+  })),
+
+  on(loadResourceGroupSuccess, (state, { group }) => {
+    return resourceGroupsAdapter.setOne(group, {
+      ...state,
+      error: null,
+      status: 'success'
+    });
+  }),
+
+  on(loadResourceGroupFailure, (state, { error }) => ({
+    ...state,
+    error: error,
+    status: 'error'
+  }))
 );
 
 export const getSelectedResourceGroupId = (state: ResourceGroupsState) =>
@@ -48,7 +77,7 @@ const {
   selectEntities,
   selectAll,
   selectTotal
-} = resourcesAdapter.getSelectors();
+} = resourceGroupsAdapter.getSelectors();
 
 // select the array of resource ids
 export const selectResourceGroupIds = selectIds;
