@@ -1,9 +1,10 @@
-import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import { Component } from '@angular/core';
+import { Router } from '@angular/router';
 import { Store } from '@ngrx/store';
-import { PaginationFilter } from 'api-client';
+import { Resource } from 'api-client';
+import { LazyLoadEvent } from 'primeng/api';
+import { LazyLoadToPaginationFilter } from 'projects/website/src/app/shared/utils/lazy-load-converter';
 import { AppState } from '../../../../app.state';
-import {} from '../../../state/resource-groups/resource-groups.selectors';
 import { loadResources } from '../../../state/resources/resources.actions';
 import {
   getResources,
@@ -15,24 +16,20 @@ import {
   templateUrl: './resource-list.component.html',
   styleUrls: ['./resource-list.component.scss']
 })
-export class ResourceListComponent implements OnInit {
+export class ResourceListComponent {
   public resources$ = this.store.select(getResources);
   public total$ = this.store.select(getResourcesTotal);
 
-  constructor(private store: Store<AppState>, private route: ActivatedRoute) {}
+  constructor(private store: Store<AppState>, private router: Router) {}
 
-  ngOnInit(): void {
-    let filter: PaginationFilter = {
-      search: '',
-      skip: 0,
-      sortField: '',
-      sortOrder: 1,
-      take: 10
-    };
-    this.store.dispatch(
-      loadResources({
-        filter
-      })
-    );
+  onLoadResources(event: LazyLoadEvent) {
+    let filter = LazyLoadToPaginationFilter(event);
+    this.store.dispatch(loadResources({ filter }));
+  }
+
+  onResourceSelection(resource: Resource) {
+    if (resource) {
+      this.router.navigate(['s', resource.id]);
+    }
   }
 }

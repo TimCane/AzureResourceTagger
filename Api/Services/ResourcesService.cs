@@ -79,7 +79,15 @@ namespace Api.Services
                         Type = new ResourceType()
                         {
                             Namespace = group.Data.ResourceType.Namespace.ToString(),
-                            Type = group.Data.ResourceType.Type.ToString()
+                            Name = group.Data.ResourceType.Type.ToString()
+                        },
+                        Tags =
+                        {
+                            group.Data.Tags.Select(t => new ResourceTag()
+                            {
+                                Key = t.Key,
+                                Value = t.Value
+                            })
                         }
                     })
                     .ToList();

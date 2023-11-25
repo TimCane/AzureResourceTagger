@@ -1,0 +1,65 @@
+<p-table
+  #dt
+  [value]="resources"
+  [lazy]="true"
+  (onLazyLoad)="onLoadResources($event)"
+  [rows]="10"
+  [totalRecords]="total"
+  [paginator]="true"
+  [globalFilterFields]="[]"
+  [tableStyle]="{ 'min-width': '75rem' }"
+  [rowHover]="true"
+  dataKey="id"
+  currentPageReportTemplate="Showing {first} to {last} of {totalRecords} entries"
+  [showCurrentPageReport]="true"
+  styleClass="p-datatable-striped"
+  [loading]="resources.length == 0"
+>
+  <ng-template pTemplate="caption">
+    <div class="flex align-items-center justify-between">
+      <span class="p-input-icon-left">
+        <i class="pi pi-search"></i>
+        <input
+          pInputText
+          type="text"
+          (input)="onSearch($event)"
+          placeholder="Search..."
+        />
+      </span>
+    </div>
+  </ng-template>
+  <ng-template pTemplate="header">
+    <tr>
+      <th pSortableColumn="name" style="min-width:15rem">
+        Name <p-sortIcon field="name"></p-sortIcon>
+      </th>
+      <th pSortableColumn="type" style="min-width:15rem">
+        Type <p-sortIcon field="type"></p-sortIcon>
+      </th>
+      <th>Tags</th>
+      <th></th>
+    </tr>
+  </ng-template>
+  <ng-template pTemplate="body" let-resource>
+    <tr>
+      <td>{{ resource.name }}</td>
+      <td>{{ resource.type.namespace }} ({{ resource.type.name }})</td>
+      <td>
+        <p-tag *ngFor="let tag of resource.tags;" [title]="tag.key" [value]="tag.value"></p-tag>
+      </td>
+      <td>
+        <div class="flex items-end">
+        </div>
+      </td>
+    </tr>
+  </ng-template>
+  <ng-template pTemplate="emptymessage">
+    <tr>
+      <td colspan="4">
+        <div class="text-center">
+          There are no resources.
+        </div>
+      </td>
+    </tr>
+  </ng-template>
+</p-table>

@@ -1,10 +1,15 @@
 <div
   *ngIf="{
+    resources: resources$ | async,
     total: total$ | async
   } as state"
 >
-
-{{state.total}}
-
-
+  <app-resources-table
+    *ngIf="state.resources"
+    [resources]="state.resources"
+    [total]="state.total!"
+    (loadResources)="onLoadResources($event)"
+    (selectResource)="onResourceSelection($event)"
+  >
+  </app-resources-table>
 </div>

@@ -25,4 +25,17 @@ message GetResourcesReply {
 
 message Resource {
 	string id = 1;
+	string name = 2;
+	ResourceType type = 3;
+	repeated ResourceTag tags = 4;
+}
+
+message ResourceType {
+	string namespace = 1;
+	string name = 2;
+}
+
+message ResourceTag {
+	string key = 1;
+	string value = 2;
 }
