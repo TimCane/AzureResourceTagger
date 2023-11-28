@@ -54,6 +54,27 @@ export class ResourceGroupsClient {
         requestClass: thisProto.GetResourceGroupsRequest,
         responseClass: thisProto.GetResourceGroupsReply
       });
+    },
+    /**
+     * Unary call: /resource_group.ResourceGroups/GetResourceGroup
+     *
+     * @param requestMessage Request message
+     * @param requestMetadata Request metadata
+     * @returns Observable<GrpcEvent<thisProto.GetResourceGroupReply>>
+     */
+    getResourceGroup: (
+      requestData: thisProto.GetResourceGroupRequest,
+      requestMetadata = new GrpcMetadata()
+    ): Observable<GrpcEvent<thisProto.GetResourceGroupReply>> => {
+      return this.handler.handle({
+        type: GrpcCallType.unary,
+        client: this.client,
+        path: '/resource_group.ResourceGroups/GetResourceGroup',
+        requestData,
+        requestMetadata,
+        requestClass: thisProto.GetResourceGroupRequest,
+        responseClass: thisProto.GetResourceGroupReply
+      });
     }
   };
 
@@ -81,6 +102,22 @@ export class ResourceGroupsClient {
   ): Observable<thisProto.GetResourceGroupsReply> {
     return this.$raw
       .getResourceGroups(requestData, requestMetadata)
+      .pipe(throwStatusErrors(), takeMessages());
+  }
+
+  /**
+   * Unary call @/resource_group.ResourceGroups/GetResourceGroup
+   *
+   * @param requestMessage Request message
+   * @param requestMetadata Request metadata
+   * @returns Observable<thisProto.GetResourceGroupReply>
+   */
+  getResourceGroup(
+    requestData: thisProto.GetResourceGroupRequest,
+    requestMetadata = new GrpcMetadata()
+  ): Observable<thisProto.GetResourceGroupReply> {
+    return this.$raw
+      .getResourceGroup(requestData, requestMetadata)
       .pipe(throwStatusErrors(), takeMessages());
   }
 }

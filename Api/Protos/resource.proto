@@ -9,7 +9,6 @@ service Resources {
   rpc GetResources (GetResourcesRequest) returns (GetResourcesReply);
 }
 
-// The request message containing the user's name.
 message GetResourcesRequest {
   string id = 1;
   int32 skip = 2;
@@ -19,12 +18,24 @@ message GetResourcesRequest {
   int32 sortOrder = 6;
 }
 
-// The response message containing the greetings.
 message GetResourcesReply {
-  repeated Resource data = 1;
+  repeated Resource resources = 1;
   int32 total = 2;
 }
 
 message Resource {
 	string id = 1;
+	string name = 2;
+	ResourceType type = 3;
+	repeated ResourceTag tags = 4;
+}
+
+message ResourceType {
+	string namespace = 1;
+	string name = 2;
+}
+
+message ResourceTag {
+	string key = 1;
+	string value = 2;
 }

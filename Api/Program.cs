@@ -21,7 +21,7 @@ namespace Api
             {
                 options.AddPolicy(policyName, b =>
                 {
-                    b.WithOrigins("http://localhost:4200") // the Angular app url
+                    b.WithOrigins("http://localhost:4200", "https://localhost:4200") // the Angular app url
                         .AllowAnyMethod()
                         .AllowAnyHeader()
                         .AllowCredentials();

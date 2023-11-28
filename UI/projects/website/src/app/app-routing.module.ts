@@ -5,7 +5,7 @@ const routes: Routes = [
   {
     path: '',
     loadChildren: () =>
-      import('./resources/resources.module').then(m => m.ResourcesModule)
+      import('./tagger/tagger.module').then(m => m.TaggerModule)
   }
 ];
 
